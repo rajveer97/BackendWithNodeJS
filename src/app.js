@@ -1,12 +1,17 @@
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
+const app = express();
 
+app.use(cors({
+  origin: process.env.CORS_ORIGIN,
+  credentials: true
+}))
 
-// MongoDb:
-//   - url: mongodb://localhost:27017/
-//   - IP address (103.108.5.210) 
-// UserName: kram35477
-// Password: JpyFexgyWq8BYD2n
+app.use(express.json({limit: "16kb"}))
+app.use(express.urlencoded({extended: true, limit: "16kb"}))
+app.use(express.static("public"))
+app.use(cookieParser())
 
-
-// mongodb+srv://kram35477:<db_password>@cluster0.v91ei.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-
+export { app };
